@@ -130,18 +130,45 @@ function getObjetsPanier() {
     return $resultat;
 }
 
-function updatePanier(){
-    
+function updatePanier($idPanier, $quantiteO){
+    $resultat = [];
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("UPDATE panier SET quantiteO=:quantiteO WHERE idPanier=:idPanier");
+        $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
+        $req->bindValue(':quantiteO', $quantiteO, PDO::PARAM_INT);
+        $req->execute();
+
+        while ($ligne = $req->fetch(PDO::FETCH_ASSOC)) {
+            $resultat[] = $ligne;
+        }
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
 }
-if(isset($_POST['update_cart'])){
-    $update_quantity = $_POST['cart_quantity'];
-    $update_id = $_POST['cart_id'];
-    mysqli_query($conn, "UPDATE `cart` SET quantity = '$update_quantity' WHERE id = '$update_id'") or die('query failed');
-    $message[] = 'cart quantity updated successfully!';
- }
  
  if(isset($_GET['remove'])){
     $remove_id = $_GET['remove'];
     mysqli_query($conn, "DELETE FROM `cart` WHERE id = '$remove_id'") or die('query failed');
     header('location:index.php');
  }
+
+function deleteObjet($idPanier, $nomO){
+    $resultat = -1;
+    try {
+        $cnx = connexionPDO();
+
+        $req = $cnx->prepare("DELETE FROM panier WHERE idPanier=:idPanier and nomO=:nomO");
+        $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
+        $req->bindValue(':nomO', $nomO, PDO::PARAM_STR);
+        
+        $resultat = $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}

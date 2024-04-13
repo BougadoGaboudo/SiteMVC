@@ -16,7 +16,6 @@ CREATE TABLE skin(
 
 CREATE TABLE panier(
    idPanier INT NOT NULL AUTO_INCREMENT,
-   idU INT,
    nomO VARCHAR(50),
    imageO VARCHAR(50),
    prixO INT,

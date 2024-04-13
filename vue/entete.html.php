@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titre ?></title>
     <link rel="stylesheet" href="./css/style.css">
+    <script defer src="https://kit.fontawesome.com/88b3295be9.js" crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 </head>
 <body>
@@ -21,7 +22,7 @@
             <li><a tabindex="6" href="./?action=boutique">Boutique</a></li>
         </ul>
         <?php if(isLoggedOn()){ ?>
-                <a tabindex="-1" href="./?action=panier"><button tabindex="7" type="button">Panier</button></a>
+                <a tabindex="7" href="./?action=panier"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #ffffff;"></i></a>
                 <a tabindex="-1" href="./?action=profil"><button tabindex="8" type="button">Profil</button></a>
         <?php } else { ?>
                 <a tabindex="-1" href="./?action=connexion"><button tabindex="7" type="button">Connexion</button></a>

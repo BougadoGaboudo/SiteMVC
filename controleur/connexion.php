@@ -3,6 +3,9 @@ if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
     $racine="..";
 }
 
+include_once "$racine/modele/bd.utilisateur.inc.php";
+include_once "$racine/modele/authentification.inc.php";
+
 if (!isset($_POST["mailU"]) || !isset($_POST["mdpU"])){
     // on affiche le formulaire de connexion
     $titre = "Connexion - PokéDaily";

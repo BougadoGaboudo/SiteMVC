@@ -30,13 +30,13 @@ if (isset($_POST["mailU"]) && isset($_POST["mdpU"]) && isset($_POST["pseudoU"]))
 
 if ($inscrit) {
     // appel du script de vue qui permet de gerer l'affichage des donnees
-    $titre = "Inscription confirmée";
+    $titre = "Inscription - PokéDaily";
     include "$racine/vue/entete.html.php";
     include "$racine/vue/vueConfirmationInscription.php";
     include "$racine/vue/pied.html.php";
 } else {
     // appel du script de vue qui permet de gerer l'affichage des donnees
-    $titre = "Inscription pb";
+    $titre = "Inscription - PokéDaily";
     include "$racine/vue/entete.html.php";
     include "$racine/vue/vueInscription.php";
     include "$racine/vue/pied.html.php";

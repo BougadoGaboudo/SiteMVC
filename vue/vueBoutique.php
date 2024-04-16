@@ -20,14 +20,12 @@
                             <div class="nom"><?= $lesExps[$i]['nomO'] ?></div>
                             <div class="prix"><h4>₽ <?= $lesExps[$i]['prixO']; ?></h4></div>
                             <input class="article-input" type="number" min="1" name="quantite_produit" value="1">
-                            <input type="hidden" name="image_produit" value="<?= $lesExps[$i]['imageO']; ?>">
-                            <input type="hidden" name="nom_produit" value="<?= $lesExps[$i]['nomO']; ?>">
-                            <input type="hidden" name="prix_produit" value="<?= $lesExps[$i]['prixO']; ?>">
+                            <input type="hidden" name="id_panier" value="<?= $idPanier['idPanier']; ?>">
+                            <input type="hidden" name="id_produit" value="<?= $lesExps[$i]['idO']; ?>">
                             <input type="submit" value="Ajouter au panier" name="ajouter_panier" class="btn">
                         </div>
                         </form>
                     <?php } ?>
-
 
                     <?php for ($i = 0; $i < count($lesBalls); $i++) { ?>
                         <form action="" method="post">
@@ -36,9 +34,8 @@
                             <div class="nom"><?= $lesBalls[$i]['nomO'] ?></div>
                             <div class="prix"><h4>₽ <?= $lesBalls[$i]['prixO']; ?></h4></div>
                             <input class="article-input" type="number" min="1" name="quantite_produit" value="1">
-                            <input type="hidden" name="image_produit" value="<?= $lesBalls[$i]['imageO']; ?>">
-                            <input type="hidden" name="nom_produit" value="<?= $lesBalls[$i]['nomO']; ?>">
-                            <input type="hidden" name="prix_produit" value="<?= $lesBalls[$i]['prixO']; ?>">
+                            <input type="hidden" name="id_panier" value="<?= $idPanier['idPanier']; ?>">
+                            <input type="hidden" name="id_produit" value="<?= $lesBalls[$i]['idO']; ?>">
                             <input type="submit" value="Ajouter au panier" name="ajouter_panier" class="btn">
                         </div>
                         </form>  
@@ -51,9 +48,8 @@
                             <div class="nom"><?= $lesBaies[$i]['nomO'] ?></div>
                             <div class="prix"><h4>₽ <?= $lesBaies[$i]['prixO']; ?></h4></div>
                             <input class="article-input" type="number" min="1" name="quantite_produit" value="1">
-                            <input type="hidden" name="image_produit" value="<?= $lesBaies[$i]['imageO']; ?>">
-                            <input type="hidden" name="nom_produit" value="<?= $lesBaies[$i]['nomO']; ?>">
-                            <input type="hidden" name="prix_produit" value="<?= $lesBaies[$i]['prixO']; ?>">
+                            <input type="hidden" name="id_panier" value="<?= $idPanier['idPanier']; ?>">
+                            <input type="hidden" name="id_produit" value="<?= $lesBaies[$i]['idO']; ?>">
                             <input type="submit" value="Ajouter au panier" name="ajouter_panier" class="btn">
                         </div>
                         </form>
@@ -66,9 +62,8 @@
                             <div class="nom"><?= $lesBadges[$i]['nomO'] ?></div>
                             <div class="prix"><h4>₽ <?= $lesBadges[$i]['prixO']; ?></h4></div>
                             <input class="article-input" type="number" min="1" name="quantite_produit" value="1">
-                            <input type="hidden" name="image_produit" value="<?= $lesBadges[$i]['imageO']; ?>">
-                            <input type="hidden" name="nom_produit" value="<?= $lesBadges[$i]['nomO']; ?>">
-                            <input type="hidden" name="prix_produit" value="<?= $lesBadges[$i]['prixO']; ?>">
+                            <input type="hidden" name="id_panier" value="<?= $idPanier['idPanier']; ?>">
+                            <input type="hidden" name="id_produit" value="<?= $lesBadges[$i]['idO']; ?>">
                             <input type="submit" value="Ajouter au panier" name="ajouter_panier" class="btn">
                         </div>
                         </form>

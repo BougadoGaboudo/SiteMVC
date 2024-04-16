@@ -35,6 +35,23 @@ function getUtilisateurByMailU($mailU) {
     return $resultat;
 }
 
+function getUtilisateursById($mailU){
+    $resultat = array();
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("select idU from utilisateur where mailU=:mailU");
+        $req->bindValue(':mailU', $mailU, PDO::PARAM_STR);
+        $req->execute();
+        
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 function addUtilisateur($mailU, $mdpU, $pseudoU) {
     try {
         $cnx = connexionPDO();
@@ -46,6 +63,15 @@ function addUtilisateur($mailU, $mdpU, $pseudoU) {
         $req->bindValue(':pseudoU', $pseudoU, PDO::PARAM_STR);
         
         $resultat = $req->execute();
+
+        // Récupérer l'idU de l'utilisateur nouvellement inséré
+        $idU = $cnx->lastInsertId();
+
+        // Insérer un nouveau panier pour cet utilisateur
+        $reqPanier = $cnx->prepare("INSERT INTO panier (idU) VALUES (:idU)");
+        $reqPanier->bindValue(':idU', $idU, PDO::PARAM_INT);
+        $resultatPanier = $reqPanier->execute();
+
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();

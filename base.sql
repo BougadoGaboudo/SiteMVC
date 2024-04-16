@@ -1,52 +1,40 @@
-CREATE TABLE objet(
-   idO INT NOT NULL AUTO_INCREMENT,
-   nomO VARCHAR(50),
-   prixO INT,
-   imageO VARCHAR(50),
-   typeO VARCHAR(50),
-   PRIMARY KEY(idO)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE skin(
-   idS INT NOT NULL AUTO_INCREMENT,
-   nomS VARCHAR(50),
-   prixS INT NOT NULL,
-   PRIMARY KEY(idS)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE panier(
-   idPanier INT NOT NULL AUTO_INCREMENT,
-   nomO VARCHAR(50),
-   imageO VARCHAR(50),
-   prixO INT,
-   quantiteO INT,
-   PRIMARY KEY(idPanier)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE inventaire(
-   idO INT,
-   idPanier INT,
-   quantiteO VARCHAR(50),
-   PRIMARY KEY(idO, idPanier),
-   FOREIGN KEY(idO) REFERENCES Objet(idO),
-   FOREIGN KEY(idPanier) REFERENCES Panier(idPanier)
-);
-
 CREATE TABLE utilisateur(
-   idU INT NOT NULL AUTO_INCREMENT,
+   idU INT AUTO_INCREMENT,
    pseudoU VARCHAR(50),
    mailU VARCHAR(50),
    mdpU VARCHAR(50),
    pokeDollar INT,
+   PRIMARY KEY(idU)
+);
+
+CREATE TABLE objet(
+   idO INT AUTO_INCREMENT,
+   nomO VARCHAR(50),
+   prixO INT,
+   imageO VARCHAR(50),
+   typeO VARCHAR (50),
+   PRIMARY KEY(idO)
+);
+
+CREATE TABLE panier(
+   idPanier INT AUTO_INCREMENT,
+   idU INT NOT NULL,
+   PRIMARY KEY(idPanier),
+   UNIQUE(idU),
+   FOREIGN KEY(idU) REFERENCES utilisateur(idU)
+);
+
+CREATE TABLE contenir(
+   idO INT,
    idPanier INT,
-   idS INT,
-   PRIMARY KEY(idU),
-   FOREIGN KEY(idPanier) REFERENCES panier(idPanier),
-   FOREIGN KEY(idS) REFERENCES skin(idS)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
+   quantiteO VARCHAR(50),
+   PRIMARY KEY(idO, idPanier),
+   FOREIGN KEY(idO) REFERENCES objet(idO),
+   FOREIGN KEY(idPanier) REFERENCES panier(idPanier)
+);
 
 CREATE TABLE pokemon(
-   idP INT NOT NULL AUTO_INCREMENT,
+   idP INT AUTO_INCREMENT,
    nomP VARCHAR(50),
    typeP VARCHAR(50),
    experience INT,
@@ -54,15 +42,8 @@ CREATE TABLE pokemon(
    idU INT NOT NULL,
    PRIMARY KEY(idP),
    FOREIGN KEY(idU) REFERENCES utilisateur(idU)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
+);
 
-CREATE TABLE acheter(
-   idU INT NOT NULL AUTO_INCREMENT,
-   idO INT,
-   PRIMARY KEY(idU, idO),
-   FOREIGN KEY(idU) REFERENCES utilisateur(idU),
-   FOREIGN KEY(idO) REFERENCES objet(idO)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
 
 
 INSERT INTO objet VALUES (1,'Super Bonbon',250,'superbonbon.png','Exp');

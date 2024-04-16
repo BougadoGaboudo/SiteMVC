@@ -10,13 +10,13 @@ if (isLoggedOn()){
     $mailU = getMailULoggedOn();
     $util = getUtilisateurByMailU($mailU);
     
-    $titre = "Mon profil";
+    $titre = "Mon profil - PokéDaily";
     include "$racine/vue/entete.html.php";
     include "$racine/vue/vueMonProfil.php";
     include "$racine/vue/pied.html.php";
 }
 else{
-    $titre = "Mon profil";
+    $titre = "Mon profil - PokéDaily";
     include "$racine/vue/entete.html.php";
     include "$racine/vue/pied.html.php";
 }

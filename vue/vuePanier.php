@@ -30,7 +30,7 @@
                         <td>
                             <form action="" method="post">    
                                 <input type="hidden" name="id_panier" value="<?= $resultat[$i]['idPanier']; ?>">
-                                <input type="hidden" name="nomO" value="<?= $resultat[$i]['nomO']; ?>">                     
+                                <input type="hidden" name="id_produit" value="<?= $resultat[$i]['idO']; ?>">                     
                                 <button type="submit" name="delete">X</button>
                             </form>
                         </td>

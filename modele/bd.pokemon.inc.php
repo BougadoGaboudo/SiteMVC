@@ -75,30 +75,51 @@ function getBadges() {
     return $resultat;
 }
 
-function ajouterPanier($idU, $nomO, $imageO, $prixO, $quantiteO) {
+function getIdPanierUser($idU){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT idPanier FROM panier WHERE idU = :idU");
+        $req->bindValue(':idU', $idU, PDO::PARAM_INT);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function ajouterPanier($idPanier, $idO, $quantiteO) {
     $resultat = [];
    
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM panier WHERE nomO=:nomO AND idU=:idU");
-        $req->bindValue(':idU', $idU, PDO::PARAM_INT);
-        $req->bindValue(':nomO', $nomO, PDO::PARAM_STR);
+
+        // Vérifier si le produit est déjà dans le panier
+        $req = $cnx->prepare("SELECT * FROM contenir WHERE idPanier = :idPanier AND idO = :idO");
+        $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
+        $req->bindValue(':idO', $idO, PDO::PARAM_INT);
         $req->execute();
 
-        // Vérifier s'il y a des produits déjà présents dans le panier
         if ($req->rowCount() > 0) {
-            $message = 'Objet déjà ajouté au panier !';
+            // Mettre à jour la quantité du produit dans le panier
+            $req = $cnx->prepare("UPDATE contenir SET quantiteO = quantiteO + :quantiteO WHERE idPanier = :idPanier AND idO = :idO");
+            $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
+            $req->bindValue(':idO', $idO, PDO::PARAM_INT);
+            $req->bindValue(':quantiteO', $quantiteO, PDO::PARAM_INT);
+            $req->execute();
+            
+            $message = 'Quantité du produit mise à jour dans le panier !';
         } else {
-            // Insérer le produit dans le panier
-            $reqInsert = $cnx->prepare("INSERT INTO panier(idU, nomO, imageO, prixO, quantiteO) VALUES(:idU, :nomO, :imageO, :prixO, :quantiteO)");
-            $reqInsert->bindValue(':idU', $idU, PDO::PARAM_INT);
-            $reqInsert->bindValue(':nomO', $nomO, PDO::PARAM_STR);
-            $reqInsert->bindValue(':imageO', $imageO, PDO::PARAM_STR);
-            $reqInsert->bindValue(':prixO', $prixO, PDO::PARAM_INT);
-            $reqInsert->bindValue(':quantiteO', $quantiteO, PDO::PARAM_INT);
-
-            $reqInsert->execute();
-
+            // Ajouter le produit au panier
+            $req = $cnx->prepare("INSERT INTO contenir(idO, idPanier, quantiteO) VALUES(:idO, :idPanier, :quantiteO)");
+            $req->bindValue(':idO', $idO, PDO::PARAM_INT);
+            $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
+            $req->bindValue(':quantiteO', $quantiteO, PDO::PARAM_INT);
+            $req->execute();
+            
             $message = 'Objet ajouté au panier !';
         }
 
@@ -112,12 +133,13 @@ function ajouterPanier($idU, $nomO, $imageO, $prixO, $quantiteO) {
     return $resultat;
 }
 
-function getObjetsPanier() {
+function getObjetsPanier($idPanier) {
     $resultat = [];
 
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM panier");
+        $req = $cnx->prepare("SELECT o.nomO, o.prixO, o.imageO, c.quantiteO, c.idPanier, c.idO FROM contenir c JOIN objet o ON c.idO = o.idO WHERE c.idPanier = :idPanier");
+        $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
         $req->execute();
 
         while ($ligne = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -135,7 +157,7 @@ function updatePanier($idPanier, $quantiteO){
 
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("UPDATE panier SET quantiteO=:quantiteO WHERE idPanier=:idPanier");
+        $req = $cnx->prepare("UPDATE contenir SET quantiteO=:quantiteO WHERE idPanier=:idPanier");
         $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
         $req->bindValue(':quantiteO', $quantiteO, PDO::PARAM_INT);
         $req->execute();
@@ -149,23 +171,17 @@ function updatePanier($idPanier, $quantiteO){
     }
     return $resultat;
 }
- 
- if(isset($_GET['remove'])){
-    $remove_id = $_GET['remove'];
-    mysqli_query($conn, "DELETE FROM `cart` WHERE id = '$remove_id'") or die('query failed');
-    header('location:index.php');
- }
 
-function deleteObjet($idPanier, $nomO){
+function deleteObjet($idPanier, $idO){
     $resultat = -1;
     try {
         $cnx = connexionPDO();
 
-        $req = $cnx->prepare("DELETE FROM panier WHERE idPanier=:idPanier and nomO=:nomO");
+        $req = $cnx->prepare("DELETE FROM contenir WHERE idPanier=:idPanier and idO=:idO");
         $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
-        $req->bindValue(':nomO', $nomO, PDO::PARAM_STR);
-        
+        $req->bindValue(':idO', $idO, PDO::PARAM_INT);
         $resultat = $req->execute();
+
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();

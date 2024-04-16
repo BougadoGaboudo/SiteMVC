@@ -5,6 +5,8 @@ if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
 
 include_once "$racine/modele/bd.inc.php";
 include_once "$racine/modele/bd.pokemon.inc.php";
+include_once "$racine/modele/authentification.inc.php";
+include_once "$racine/modele/bd.utilisateur.inc.php";
 
 $lesExps = getExps();
 $lesBalls = getBalls();
@@ -12,17 +14,23 @@ $lesBaies = getBaies();
 $lesBadges = getBadges();
 
 session_start();
-$idU = isset($_SESSION['idU']) ? $_SESSION['idU'] : null;
-
-if(isset($_POST['ajouter_panier'])){
-
-$nomO = $_POST['nom_produit'];
-$prixO = $_POST['prix_produit'];
-$imageO = $_POST['image_produit'];
-$quantiteO = $_POST['quantite_produit'];
-
-$resultat = ajouterPanier($idU, $nomO, $imageO, $prixO, $quantiteO);
+$idU = $_SESSION['idU'];
+$mailU = getMailULoggedOn();
+var_dump($idU);
+if (isLoggedOn()){
+    $idPanier = getIdPanierUser($idU);
+    var_dump($idPanier);
+    if(isset($_POST['ajouter_panier'])){
+        $idPanier = $_POST['id_panier'];
+        $idO = $_POST['id_produit'];
+        $quantiteO = $_POST['quantite_produit'];
+    
+        ajouterPanier($idPanier, $idO, $quantiteO);
+        header('location:?action=boutique');
+    }
 }
+
+
 
 
 $titre = "Boutique - PokéDaily";

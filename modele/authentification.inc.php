@@ -7,13 +7,15 @@ function login($mailU, $mdpU) {
         session_start();
     }
 
-$util = getUtilisateurByMailU($mailU); 
+    $util = getUtilisateurByMailU($mailU);
+
     if($util){
         $mdpBD = $util["mdpU"];
         if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
             // le mot de passe est celui de l'utilisateur dans la base de donnees
             $_SESSION["mailU"] = $mailU;
             $_SESSION["mdpU"] = $mdpBD;
+            $_SESSION["idU"] =  $util["idU"];
         }
     }  
 }

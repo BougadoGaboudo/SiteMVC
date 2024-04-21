@@ -1,6 +1,6 @@
-<main class="bg">
+<main class="bg flex relative">
 
-<article class="form-height">
+<article class="form-height co-absolute">
 
             <section class="form-sect">
                 <div class="form-div">

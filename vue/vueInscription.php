@@ -1,7 +1,7 @@
 <main>
-    <article class="bg">
+    <article class="bg flex relative">
 
-            <section class="form-sect">
+            <section class="form-sect insc-absolute">
                 <div class="form-div">
                     <form class="inscription" action="./?action=inscription" method="POST">
                         <fieldset>

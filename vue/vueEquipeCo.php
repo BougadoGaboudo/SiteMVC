@@ -1,4 +1,4 @@
-<main>
+<main class="bg">
 
 <section class="fond">
 <div class="container-equipe">
@@ -102,4 +102,4 @@
 </div>
 </section>
 </main>
-<script src="equipe.js"></script>
+<script src="starter.js"></script>

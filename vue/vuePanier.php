@@ -1,5 +1,5 @@
 <main>
-    <section class="flex">
+    <section class="flex bg">
         <h1 class="h1-panier">Votre panier</h1>
         <table>
             <thead>
@@ -20,10 +20,11 @@
                         <td><?= $resultat[$i]['prixO'] ?></td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="id_panier" value="<?= $resultat[$i]['idPanier']; ?>">                             
+                                <input type="hidden" name="id_panier" value="<?= $resultat[$i]['idPanier']; ?>">  
+                                <input type="hidden" name="id_produit" value="<?= $resultat[$i]['idO']; ?>">                     
                                 <input type="number" min="1" name="quantite_panier" value="<?= $resultat[$i]['quantiteO'] ?>">
                                 <?= $resultat[$i]['quantiteO'] ?>
-                                <input type="submit" value="Modifier" name="update_quantite" class="btn">
+                                <input type="submit" value="Modifier" name="update_quantite" class="btn btn-orange">
                             </form>
                         </td>
                         <td><?= $resultat[$i]['prixO']*$resultat[$i]['quantiteO'] ?></td>
@@ -31,7 +32,7 @@
                             <form action="" method="post">    
                                 <input type="hidden" name="id_panier" value="<?= $resultat[$i]['idPanier']; ?>">
                                 <input type="hidden" name="id_produit" value="<?= $resultat[$i]['idO']; ?>">                     
-                                <button type="submit" name="delete">X</button>
+                                <button class="btn-red nomarg" type="submit" name="delete">X</button>
                             </form>
                         </td>
                     </tr>

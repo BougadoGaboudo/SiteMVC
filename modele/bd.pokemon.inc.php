@@ -152,13 +152,14 @@ function getObjetsPanier($idPanier) {
     return $resultat;
 }
 
-function updatePanier($idPanier, $quantiteO){
+function updatePanier($idPanier, $idO, $quantiteO){
     $resultat = [];
 
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("UPDATE contenir SET quantiteO=:quantiteO WHERE idPanier=:idPanier");
+        $req = $cnx->prepare("UPDATE contenir SET quantiteO=:quantiteO WHERE idPanier=:idPanier AND idO=:idO");
         $req->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
+        $req->bindValue(':idO', $idO, PDO::PARAM_INT);
         $req->bindValue(':quantiteO', $quantiteO, PDO::PARAM_INT);
         $req->execute();
 

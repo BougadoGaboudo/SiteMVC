@@ -16,10 +16,10 @@ $lesBadges = getBadges();
 session_start();
 $idU = $_SESSION['idU'];
 $mailU = getMailULoggedOn();
-var_dump($idU);
+
 if (isLoggedOn()){
     $idPanier = getIdPanierUser($idU);
-    var_dump($idPanier);
+
     if(isset($_POST['ajouter_panier'])){
         $idPanier = $_POST['id_panier'];
         $idO = $_POST['id_produit'];

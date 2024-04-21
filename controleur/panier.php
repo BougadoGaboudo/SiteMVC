@@ -19,9 +19,10 @@ $prixTotal = 0;
 
 if(isset($_POST['update_quantite'])){
     $idPanier = $_POST['id_panier'];
+    $idO = $_POST['id_produit'];
     $quantiteO = $_POST['quantite_panier'];
 
-    updatePanier($idPanier, $quantiteO);
+    updatePanier($idPanier, $idO, $quantiteO);
     $msg = 'Quantité mise à jour';
     header('location:?action=panier');
 }

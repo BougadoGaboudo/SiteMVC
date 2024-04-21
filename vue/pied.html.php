@@ -16,7 +16,7 @@
         <a href="#">Conditions d'utilisation</a>
         <a href="#">Politique de confidentialité</a>
         <a href="./?action=mentions">Mentions légales</a>
-        <a href="#">Accessibilité : non conforme</a>
+        <a href="#">Accessibilité : conforme</a>
         <a href="#">Contact</a>
     </div>
 </footer>

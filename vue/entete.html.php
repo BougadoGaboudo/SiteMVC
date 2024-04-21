@@ -22,8 +22,10 @@
             <li><a tabindex="6" href="./?action=boutique">Boutique</a></li>
         </ul>
         <?php if(isLoggedOn()){ ?>
-                <a tabindex="7" href="./?action=panier"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #ffffff;"></i></a>
+            <div>
+                <a tabindex="-1" href="./?action=panier"><i tabindex="7" aria-label="Votre panier" class="fa-solid fa-cart-shopping fa-2xl" style="color: #ffffff;"></i></a>
                 <a tabindex="-1" href="./?action=profil"><button tabindex="8" type="button">Profil</button></a>
+            </div>
         <?php } else { ?>
                 <a tabindex="-1" href="./?action=connexion"><button tabindex="7" type="button">Connexion</button></a>
         <?php } ?>

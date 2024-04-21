@@ -44,18 +44,22 @@ CREATE TABLE pokemon(
    FOREIGN KEY(idU) REFERENCES utilisateur(idU)
 );
 
+-- Compte test / 'seu.8HpuOxyTU' ça correspond au mdp '123'
+INSERT INTO utilisateur VALUES (1,'test','test@gmail.com','seu.8HpuOxyTU',NULL);
 
-
-INSERT INTO objet VALUES (1,'Super Bonbon',250,'superbonbon.png','Exp');
+INSERT INTO objet VALUES (1,'Super Bonbon',950,'superbonbon.png','Exp');
 INSERT INTO objet VALUES (2,'Baie Oran',150,'baieoran.png','Baie');
-INSERT INTO objet VALUES (3,'Super Ball',100,'superball.png','Ball');
-INSERT INTO objet VALUES (4,'Badge Charbon',50,'charbon.png','Badge');
-INSERT INTO objet VALUES (5,'Speed Ball',100,'speedball.png','Ball');
-INSERT INTO objet VALUES (6,'Baie Sitrus',300,'baiesitrus.png','Baie');
-INSERT INTO objet VALUES (7,'Chrono Ball',100,'chronoball.png','Ball');
-INSERT INTO objet VALUES (8,'Sombre Ball',100,'sombreball.png','Ball');
-INSERT INTO objet VALUES (9,'Bis Ball',100,'bisball.png','Ball');
-INSERT INTO objet VALUES (10,'Luxe Ball',100,'luxeball.png','Ball');
-INSERT INTO objet VALUES (11,'Rapide Ball',100,'rapideball.png','Ball');
-INSERT INTO objet VALUES (12,'Honor Ball',100,'honorball.png','Ball');
-INSERT INTO objet VALUES (13,'Badge Prisme',50,'prisme.png','Badge');
+INSERT INTO objet VALUES (3,'Super Ball',200,'superball.png','Ball');
+INSERT INTO objet VALUES (4,'Badge Charbon',700,'charbon.png','Badge');
+INSERT INTO objet VALUES (5,'Speed Ball',300,'speedball.png','Ball');
+INSERT INTO objet VALUES (6,'Baie Sitrus',250,'baiesitrus.png','Baie');
+INSERT INTO objet VALUES (7,'Chrono Ball',300,'chronoball.png','Ball');
+INSERT INTO objet VALUES (8,'Sombre Ball',300,'sombreball.png','Ball');
+INSERT INTO objet VALUES (9,'Bis Ball',300,'bisball.png','Ball');
+INSERT INTO objet VALUES (10,'Luxe Ball',300,'luxeball.png','Ball');
+INSERT INTO objet VALUES (11,'Rapide Ball',300,'rapideball.png','Ball');
+INSERT INTO objet VALUES (12,'Honor Ball',250,'honorball.png','Ball');
+INSERT INTO objet VALUES (13,'Badge Prisme',750,'prisme.png','Badge');
+INSERT INTO objet VALUES (14,'Baie Prine',250,'baieprine.png','Baie');
+INSERT INTO objet VALUES (15,'Baie Tomato',250,'baietomato.png','Baie');
+INSERT INTO objet VALUES (16,'Baie Mepo',250,'baiemepo.png','Baie');
